@@ -75,7 +75,7 @@ THE SOFTWARE.
     AnalyticsBase.prototype = prototype;
 
     // Enforce the constructor to be what we expect
-    AnalyticsBase.constructor = Class;
+    AnalyticsBase.constructor = AnalyticsBase;
 
     // And make this class extendable
     AnalyticsBase.extend = arguments.callee;
