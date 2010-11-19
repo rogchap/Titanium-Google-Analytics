@@ -126,7 +126,7 @@ var Analytics = AnalyticsBase.extend({
 	},
 	
 	trackPageview: function(pageUrl){
-		
+		Titanium.API.log('in trackpageview');
 		if (this._session && this.enabled) {
 					
 			this._createEvent(this._PAGEVIEW, pageUrl, null, -1);
@@ -241,7 +241,8 @@ var Analytics = AnalyticsBase.extend({
 				this._httpClient.open('GET', 'http://www.google-analytics.com' + path, false);
 				this._httpClient.setRequestHeader('User-Agent', this._USER_AGENT);
 				this._httpClient.send();
-				
+				Titanium.API.log("request sent for : http://www.google-analytics.com" + path);
+				Titanium.API.log(this._USER_AGENT);
 				eventsToDelete.push(event.event_id);
 				
 				eventRows.next();
@@ -265,8 +266,18 @@ var Analytics = AnalyticsBase.extend({
 		path.append('&utmsr=' + Titanium.Platform.displayCaps.platformWidth + 'x' + Titanium.Platform.displayCaps.platformHeight);
 		path.append('&utmsc=24-bit');
 		path.append('&utmul='+ Titanium.Platform.locale + '-' + Titanium.Platform.countryCode);
-		path.append('&utmp=').append(event.action);
+		
 		path.append('&utmac=').append(this._accountId);
+		
+		if (event.category == this._PAGEVIEW) {
+		    //just page tracking
+		    path.append('&utmp=').append(event.action);
+	    } else {
+		    //event tracking
+		    var tmpValue = (event.value > 0) ? event.value : 1;
+		    path.append('&utmt=event');
+		    path.append('&utme=5('+event.category+'*'+event.action+'*'+event.label+')('+tmpValue+')');
+		}
 		
 		path.append('&utmcc=');
 		
