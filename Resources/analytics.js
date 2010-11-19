@@ -126,7 +126,7 @@ var Analytics = AnalyticsBase.extend({
 	},
 	
 	trackPageview: function(pageUrl){
-		Titanium.API.log('in trackpageview');
+		
 		if (this._session && this.enabled) {
 					
 			this._createEvent(this._PAGEVIEW, pageUrl, null, -1);
@@ -241,8 +241,7 @@ var Analytics = AnalyticsBase.extend({
 				this._httpClient.open('GET', 'http://www.google-analytics.com' + path, false);
 				this._httpClient.setRequestHeader('User-Agent', this._USER_AGENT);
 				this._httpClient.send();
-				Titanium.API.log("request sent for : http://www.google-analytics.com" + path);
-				Titanium.API.log(this._USER_AGENT);
+				
 				eventsToDelete.push(event.event_id);
 				
 				eventRows.next();
