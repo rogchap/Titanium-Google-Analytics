@@ -88,7 +88,7 @@ var Analytics = AnalyticsBase.extend({
 
 	//Constants
 	_PAGEVIEW:'__##PAGEVIEW##__',
-	_USER_AGENT:'GoogleAnalytics/1.0 ('+ Titanium.Platform.username +'; U; CPU '+ Titanium.Platform.name + ' ' + Titanium.Platform.version + ' like Mac OS X; ' + Titanium.Platform.locale + '-' + Titanium.Platform.countryCode + ')',
+	_USER_AGENT:'GoogleAnalytics/1.0 ('+ Titanium.Platform.username +'; U; CPU '+ Titanium.Platform.name + ' ' + Titanium.Platform.version + ' like Mac OS X; ' + Titanium.Platform.locale + '-' + Titanium.Locale.getCurrentCountry() + ')',
 	
 	//Private properties
 	_accountId: undefined,
