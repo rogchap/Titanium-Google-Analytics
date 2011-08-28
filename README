@@ -20,26 +20,7 @@ parameters to handle traking of events....ie. I still need to finish this off! :
 
 From Google: You must indicate to your users, either in the application itself or in your 
 terms of service, that you reserve the right to anonymously track and report a user's activity 
-inside of your app. 
-
-In order to generate the user-agent and one of the analytics parameters I needed the users country;
-I had to add a method into the Titanium SDK as it did not exist.
-
-In the Titanium SDK add the following:
-
-iphone/Classes/PlatformModule.m
-
--(NSString*)countryCode
-{
-	NSLocale *locale = [NSLocale currentLocale];
-	return [locale objectForKey:NSLocaleCountryCode];
-}
-
-iphone/Classes/PlatformModule.h
-
-@property(readonly,nonatomic) NSString *countryCode;
-
-Now I can call Titanium.Platform.countryCode
+inside of your app.
 
 I hope some people find this useful.
 
