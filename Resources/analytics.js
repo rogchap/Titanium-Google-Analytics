@@ -103,6 +103,9 @@ var Analytics = AnalyticsBase.extend({
 	
 	//Constructor: var analytics = new Analytics('UA-XXXXXXX-X');
 	init: function(accountId){
+		if(Ti.Platform.osname === 'android') {
+			this._USER_AGENT = 'GoogleAnalytics/1.0 (Linux; U; Android ' + Titanium.Platform.version + '; ' + Titanium.Locale.currentLocale + '; ' + Titanium.Platform.model + ')';
+		}
 		this._accountId = accountId;
 		this._db = Titanium.Database.open('analytics');
 		this._initialize_db();
