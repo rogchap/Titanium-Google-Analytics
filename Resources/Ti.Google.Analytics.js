@@ -102,9 +102,13 @@ var Analytics = AnalyticsBase.extend({
 	//Public properties
 	enabled: true,
 	
-	//Constructor: var analytics = new Analytics('UA-XXXXXXX-X');
+	/*
+	* Constructor: 
+	* var gaModule = require('Ti.Google.Analytics');
+	*	var analytics = new gaModule('UA-XXXXXX-X');
+	*/
 	init: function(accountId){
-		if(Ti.Platform.osname === 'android') {
+		if(Titanium.Platform.osname === 'android') {
 			this._USER_AGENT = 'GoogleAnalytics/1.0 (Linux; U; Android ' + Titanium.Platform.version + '; ' + Titanium.Locale.currentLocale + '; ' + Titanium.Platform.model + ')';
 		}
 		this._accountId = accountId;

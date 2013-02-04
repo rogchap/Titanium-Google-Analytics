@@ -2,11 +2,11 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
 <id>com.rogchap.gaexample</id>
 <name>GoogleAnalyticsExample</name>
-<version>1.0</version>
+<version>1.3</version>
 <publisher>Roger Chapman</publisher>
 <url>https://github.com/rogchap</url>
 <description>Example project demostrating Google Analytics</description>
-<copyright>2010 by Roger Chapman</copyright>
+<copyright>2013 by Roger Chapman</copyright>
 <icon>default_app_logo.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
