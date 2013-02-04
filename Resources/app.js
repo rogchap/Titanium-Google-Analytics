@@ -1,54 +1,42 @@
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Titanium.UI.setBackgroundColor('#000');
 
-//Set up analytics
-Titanium.include('analytics.js');
-var analytics = new Analytics('UA-XXXXXX-X');
+var gaModule = require('Ti.Google.Analytics');
+var analytics = new gaModule('UA-XXXXXX-X');
+
 // Call the next function if you want to reset the analytics to a new first time visit.
 // This is useful for development only and should not go into a production app.
 //analytics.reset();
 
 // The analytics object functions must be called on app.js otherwise it will loose it's context
-Titanium.App.addEventListener('analytics_trackPageview', function(e){
+Ti.App.addEventListener('analytics_trackPageview', function(e){
 	analytics.trackPageview('/iPad' + e.pageUrl);
 });
 
-Titanium.App.addEventListener('analytics_trackEvent', function(e){
+Ti.App.addEventListener('analytics_trackEvent', function(e){
 	analytics.trackEvent(e.category, e.action, e.label, e.value);
 });
 
-
-// I've set a global Analytics object to contain the two functions to make it easier to fire the analytics events from other windows
-Titanium.App.Analytics = {
-	trackPageview:function(pageUrl){
-		Titanium.App.fireEvent('analytics_trackPageview', {pageUrl:pageUrl});
-	},
-	trackEvent:function(category, action, label, value){
-		Titanium.App.fireEvent('analytics_trackEvent', {category:category, action:action, label:label, value:value});
-	}
-}
-
 // Starts a new session as long as analytics.enabled = true
 // Function takes an integer which is the dispatch interval in seconds
-analytics.start(10);
-
+analytics.start(10,true);
 
 
 // create tab group
-var tabGroup = Titanium.UI.createTabGroup();
+var tabGroup = Ti.UI.createTabGroup();
 
 
 //
 // create base UI tab and root window
 //
-var win1 = Titanium.UI.createWindow({  
+var win1 = Ti.UI.createWindow({  
     title:'Tab 1',
     backgroundColor:'#fff'
 });
 
 // track page view on focus
 win1.addEventListener('focus', function(e){
-	Titanium.App.Analytics.trackPageview('/win1');
+	analytics.trackPageview('/win1');
 });
 
 var tab1 = Titanium.UI.createTab({  
@@ -77,7 +65,7 @@ var win2 = Titanium.UI.createWindow({
 
 // track page view on focus
 win2.addEventListener('focus', function(e){
-	Titanium.App.Analytics.trackPageview('/win2');
+	analytics.trackPageview('/win2');
 });
 
 var tab2 = Titanium.UI.createTab({  

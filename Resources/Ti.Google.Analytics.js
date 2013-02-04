@@ -1,3 +1,4 @@
+/*jslint maxerr:1000 */
 /*
 The MIT License
 
@@ -112,11 +113,12 @@ var Analytics = AnalyticsBase.extend({
 	},
 	
 	//Main public methods
-	start: function(dispatchPeriod){
+	start: function(dispatchPeriod,isAsync){
+        this._isAsync = (isAsync == (undefined || true) ? true : false);
 		if (this.enabled) {
 			this._startNewVisit();
 			this._httpClient = Titanium.Network.createHTTPClient();
-			
+
 			var context = this;
 			setInterval(function(){
 				context._dispatchEvents();
@@ -241,7 +243,7 @@ var Analytics = AnalyticsBase.extend({
 				
 				var path = this._constructRequestPath(event);
 				
-				this._httpClient.open('GET', 'http://www.google-analytics.com' + path, false);
+				this._httpClient.open('GET', 'http://www.google-analytics.com' + path, this._isAsync);
 				this._httpClient.setRequestHeader('User-Agent', this._USER_AGENT);
 				this._httpClient.send();
 				
@@ -323,3 +325,9 @@ StringBuilder.prototype.clear = function (){
 StringBuilder.prototype.toString = function (){
     return this.strings.join('');
 };
+
+var commonJSWrapper = function(key) {
+	return new Analytics(key);
+};
+
+module.exports = commonJSWrapper;
