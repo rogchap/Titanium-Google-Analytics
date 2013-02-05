@@ -19,6 +19,18 @@ inside of your app.
 
 I hope some people find this useful.
 
+## Google Analytics SDK v2
+
+Google has released a new version of the analytics specifically for mobile applications. This is a huge improvement over 'faking' mobile application analytics as a website.
+
+However, **v1.x of this module is only compatible with GA v1.x**
+
+I'm looking to create v2 of this module and the issue is beeing tracked here: #11
+
+Switching to use Git Flow, so new developments will be merged into the develop branch, and the master branch will be used for release versions.
+
+v2 is likely to break v1.x as Google have added a lot of new functionality to GA SDK v2
+
 
 ----------------------------------
 
